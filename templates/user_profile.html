@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333; 
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h2, h3 {
+            color: #000; 
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .upload-btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p.tag-list {
+            margin: 0;
+            padding: 6px 14px;
+            display: inline-block;
+            background-color: #000000;
+            color: #fff;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        p.tag-list + p.tag-list {
+            margin-left: 10px;
+        }
+
+        .change-preference-btn,
+        .change-password-btn,
+        .logout-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 20px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+
+        .change-preference-btn {
+            background-color: #008CBA; 
+        }
+
+        .change-preference-btn:hover {
+            background-color: #005c7a; 
+        }
+
+        .change-password-btn {
+            background-color: #4caf50; 
+        }
+
+        .change-password-btn:hover {
+            background-color: #046944; 
+        }
+
+        .logout-btn {
+            background-color: #d32f2f; 
+            font-size: 24px;
+        }
+
+        .logout-btn:hover {
+            background-color: #b71c1c; 
+        }
+
+        .view-playlist-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            outline: none;
+            text-align: center;
+        }
+
+        .view-playlist-btn:hover {
+            background-color: #005c7a;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .tag-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #8f3321;
+            color: #fff;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .playlist-container,
+        .video-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .playlist-details,
+        .video-details {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .video-player {
+            max-width: 100%; 
+            max-height: 360px; 
+            height: auto; 
+            margin-top: 15px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 30px;
+        }
+
+        .playlist-title,
+        .video-title {
+            font-size: 20px;
+            color: #008CBA;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+            text-transform: capitalize; 
+            border-bottom: 2px solid #008CBA; 
+            padding-bottom: 5px; 
+            display: inline-block; 
+            line-height: 1.2; 
+        }
+
+        .playlist-title:hover,
+        .video-title:hover {
+            color: #005c7a; 
+        }
+        .playlist-thumbnail,
+        .video-thumbnail {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Home</h1>
+    </header>
+
+    <div class="container">
+        <div class="upload-btn-container">
+            <a class="change-preference-btn" href="{{ url_for('select_tags', username=username) }}">Manage Preferences</a>
+            <a class="change-password-btn" href="{{ url_for('change_password', username=username, role='hocvien') }}">Change Password</a>
+            <button class="logout-btn" onclick="window.location.href='/logout'">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+
+        <br>
+
+        <div class="grid-container">
+            {% for tag in tags %}
+            <div>
+                <p class="tag-list">{{ tag }}</p>
+                <div class="playlist-container">
+                    {% if teacher_playlists %}
+                    <h2>Teacher's Playlists:</h2>
+                    <ul>
+                        {% for playlist in teacher_playlists %}
+                            {% if tag in playlist.tags %}
+                            <div class="playlist-details">
+                                <div class="playlist-title">{{ playlist.name }} - Teacher: {{playlist.teacher_name}}</div>
+                                <div class="playlist-thumbnail">
+                                    {% set first_video_url = playlist.playlist_videos[0] if playlist.playlist_videos else None %}
+                                    {% if first_video_url %}
+                                    <video class="video-player" controls>
+                                        <source src="{{ first_video_url }}" type="video/mp4">
+                                        <!-- Thông báo nếu trình duyệt không hỗ trợ video -->
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    {% else %}
+                                    <img class="playlist-thumbnail" src="{{ url_for('static', filename='placeholder_thumbnail.jpg') }}" alt="Thumbnail Placeholder">
+                                    {% endif %}
+                                </div>
+                                <div class="playlist-details">
+                                    <p>{{ playlist.num_videos }} videos</p>
+                                    <div class="tags-container">
+                                        {% for tag in playlist.tags %}
+                                            <span class="tag-badge">{{ tag }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    <br>
+                                    <a href="{{ url_for('playlist_page', playlist_id=playlist.id, username=username) }}" class="view-playlist-btn">View Playlist</a>
+                                </div>                                
+                            {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <p>No playlists found for this teacher.</p>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="video-container">
+                    {% if videos_by_tags %}
+                    <h2>Videos:</h2>
+                    {% for video in videos_by_tags %}
+                        {% if video.tag == tag %}
+                        <div class="video-details">
+                            <div class="video-title">{{ video.title }} - Teacher: {{video.teacher_name}}</div>
+                            <video class="video-player" controls>
+                                <source src="{{ video.video_url }}" type="video/mp4">
+                                <!-- Thông báo nếu trình duyệt không hỗ trợ video -->
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <p>No videos found for your selected preferences.</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}    
+        </div>
+    </div>
+</body>
+</html>
