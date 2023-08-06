@@ -12,9 +12,11 @@ Cách 1: Tải code về máy bằng git clone
 		-> example:	git config --global user.email johndoe@example.com
 
 	4.Gõ lệnh 
-		git clone https://github.com/ptyants/share-code-steam-hack.git
+		git clone https://github.com/ptyants/Share-code-Edu4All-project.git
 
 Cách 2: Tải tất cả code về theo cách thông thường
+	
+	Trong quá trình tải code xuống có thể mất vài phút để tải xong vì trong file chứa dữ liệu của người dùng. Nên xin vui lòng chờ đợi
 
 II) Khởi tạo môi trường và thư viên cần thiết:
 * trong quá trình cài đặt và tải các gói khuyến kích sử dụng trên Command Prompt (CMD) dưới quyền admin
@@ -41,23 +43,23 @@ II) Khởi tạo môi trường và thư viên cần thiết:
 3. Nhập các package:
 		pip install -r requirements.txt
 
-	Trong quá trình cài đặt của file requirements.txt có thể hơi lâu vì có những thư viện thừa mà tôi chưa thể xác định được
-	Nên xin hãy chờ đợi trong ít phút
+	
 
 Nếu bạn tải và cài đặt đến giờ mà chưa gặp vấn đề gì thì xin chúc mừng bạn đặt hoàn thành !
 
+Nếu máy báo chưa có thử viên flask-wtf thì xin hãy gõ lệnh này trong thanh terminal: pip install Flask-WTF
 Nếu bạn gặp lỗi về một vài thư viện không thể import được xin hỗ bổ sung nó sau
 
 # --debug: Cập nhật lại ứng dụng mỗi khi có thay đổi
 flask --debug run
-# Có một số trường hợp sử dụng vscode báo Warning nhưng vẫn có thể khởi chạy chương trình khi gõ lệnh này trên thanh terminal: flask run
+# Có một số trường hợp sử dụng vscode báo Warning nhưng vẫn có thể khởi chạy chương trình khi gõ lệnh này trên thanh terminal: flask run hoặc có thể chạy chương trình như bình thường
 
 
 Tham khảo thêm ở: https://blogchiasekienthuc.com/lap-trinh/cai-dat-git-tren-windows-10.html (cách tải git về máy)
-				  https://www.youtube.com/watch?v=N_tabayXkdI     (Cách clone dự án từ GitHub về máy)
-		  		  https://www.youtube.com/watch?v=7EKM0V9FqUA	  (Clone dự án từ Repo Github về Git trong 1 câu lệnh)
+		  https://www.youtube.com/watch?v=N_tabayXkdI     (Cách clone dự án từ GitHub về máy)
+		  https://www.youtube.com/watch?v=7EKM0V9FqUA	  (Clone dự án từ Repo Github về Git trong 1 câu lệnh)
                   https://docs.python.org/3/tutorial/venv.html    (cách tạo môi trường ảo cho máy)
-			      https://t3h.com.vn/tin-tuc/trien-khai-ung-dung-vi-du-python-flask-bang-heroku  (cách tạo môi trường ảo cho máy)
+		  https://t3h.com.vn/tin-tuc/trien-khai-ung-dung-vi-du-python-flask-bang-heroku  (cách tạo môi trường ảo cho máy)
 
 
 III) Một số chú thích về việc vận hành web:
